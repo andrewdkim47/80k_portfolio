@@ -1,8 +1,8 @@
 import { mount } from 'svelte'
 import './style/app.css'
-import App from './App.svelte'
+import ModeSelection from './ModeSelection.svelte'
 
-const app = mount(App, {
+const app = mount(ModeSelection, {
   target: document.getElementById('app'),
 })
 
