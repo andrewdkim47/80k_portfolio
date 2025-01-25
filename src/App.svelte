@@ -2,7 +2,6 @@
   import * as THREE from 'three';
   import { onMount } from 'svelte';
 
-
   let container;
 
   onMount(() => {
@@ -13,31 +12,74 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
-    // Create a cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Create character (using a cube for simplicity)
+    const characterGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const characterMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const character = new THREE.Mesh(characterGeometry, characterMaterial);
+    scene.add(character);
 
-    camera.position.z = 5;
+    // Create floor with walls
+    const roomSize = 10;
+    const floorGeometry = new THREE.PlaneGeometry(roomSize, roomSize);
+    const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
+    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor.rotation.x = Math.PI / 2;
+    scene.add(floor);
+
+    // Character size (assuming cube is 1x1x1)
+    const characterSize = 0.5;  // Half the cube's width
+
+    // Position camera
+    camera.position.y = 5;
+    camera.position.z = 8;
+    camera.lookAt(character.position);
+
+    // Movement speed
+    const speed = 0.1;
+
+    // Handle keyboard input
+    const keyState = {};
+    document.addEventListener('keydown', (event) => {
+        keyState[event.key] = true;
+    });
+    document.addEventListener('keyup', (event) => {
+        keyState[event.key] = false;
+    });
 
     // Animation loop
     function animate() {
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-      // Rotate the cube
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+        // Store potential new position
+        const newPosition = character.position.clone();
 
-      renderer.render(scene, camera);
+        if (keyState['ArrowUp']) {
+            newPosition.z -= speed;
+        }
+        if (keyState['ArrowDown']) {
+            newPosition.z += speed;
+        }
+        if (keyState['ArrowLeft']) {
+            newPosition.x -= speed;
+        }
+        if (keyState['ArrowRight']) {
+            newPosition.x += speed;
+        }
+
+        // Check boundaries before applying movement
+        const halfRoom = roomSize / 2;
+        character.position.x = Math.max(-halfRoom + characterSize, Math.min(halfRoom - characterSize, newPosition.x));
+        character.position.z = Math.max(-halfRoom + characterSize, Math.min(halfRoom - characterSize, newPosition.z));
+
+        renderer.render(scene, camera);
     }
     animate();
 
     // Handle window resize
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
     // Cleanup
