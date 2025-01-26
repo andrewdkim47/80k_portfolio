@@ -8,9 +8,9 @@
     function selectMode(mode) {
       selectedMode = mode;
     }
-  </script>
+</script>
 
-  <main>
+<main>
     {#if !selectedMode}
       <div class="mode-selection">
         <h1>Choose your<br>
@@ -33,9 +33,10 @@
     {:else}
       <App mode={selectedMode} />
     {/if}
-  </main>
+</main>
 
-  <style>
+<style>
+
     .mode-selection {
       position: absolute;
       top: 50%;
@@ -49,27 +50,44 @@
     }
 
     h1 {
+      font-size: 8vw;
       color: #333;
     }
 
     h2 {
+      font-size: 5vw;
       color: #333;
+    }
+
+    /* Media query for desktop dimensions */
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 48px;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
     }
 
     .buttons {
       display: flex;
-      gap: 2rem;
     }
 
     button {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.5rem 2.5rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      //padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      font-family: inherit;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      transition: border-color 0.25s;
     }
 
     button:hover {
@@ -80,7 +98,7 @@
     button span {
       font-size: 1em;
       opacity: 0.8;
-      color: rgb(186, 87, 87);
+      color: rgb(55, 110, 221);
     }
 
     .cool {
@@ -92,4 +110,4 @@
       background: #f5f5f5;
       color: white;
     }
-  </style>
+</style>
