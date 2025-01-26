@@ -1,5 +1,6 @@
 <script>
     import App from './App.svelte'
+    import CoolModeHomeButton from './lib/coolMode/CoolModeHomeButton.svelte';
 
     let selectedMode = null;
 
@@ -13,13 +14,14 @@
       <div class="mode-selection">
         <h1>Choose Your Experience</h1>
         <div class="buttons">
-          <button class="cool" on:click={() => selectMode('cool')}>
-            Cool Mode
-            <span>Interactive Experience</span>
+
+          <button on:click={() => selectMode('cool')}>
+            <CoolModeHomeButton />
           </button>
+
           <button class="boring" on:click={() => selectMode('boring')}>
             Professional Mode
-            <span>Static Website</span>
+            <span>(Better for Mobile Devices)</span>
           </button>
         </div>
       </div>
