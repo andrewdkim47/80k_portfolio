@@ -17,7 +17,6 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#discography">Discography</a></li>
             <li><a href="#videos">Videos</a></li>
-            <li><a href="#for-sale">For Sale</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -75,6 +74,9 @@
         }
         nav.open {
             display: block; /* Show nav when open on mobile */
+        }
+        nav.open ul {
+            flex-direction: column; /* Stack items vertically when nav is open */
         }
     }
 </style>

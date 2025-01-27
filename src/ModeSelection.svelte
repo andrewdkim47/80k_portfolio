@@ -19,13 +19,13 @@
 
           <button on:click={() => selectMode('cool')}>
             <h2>Cool Mode</h2>
-            <span>(For PC)</span>
+            <span>(Best for PC)</span>
             <CoolModeHomeButton />
           </button>
 
           <button class="boring" on:click={() => selectMode('boring')}>
             <h2>Boring Mode</h2>
-            <span>(For Mobile)</span>
+            <span>(Best for Mobile)</span>
             <BoringModeHomeButton />
           </button>
         </div>

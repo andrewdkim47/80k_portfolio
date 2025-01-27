@@ -1,42 +1,38 @@
 <script>
 
   import BoringModeHeader from './BoringModeHeader.svelte'; // Import the header component
+  import BoringModeTrackGrid from './BoringModeTrackGrid.svelte';
 
-  // Portfolio data
-  const projects = [
-    {
-      title: "Project 1",
-      description: "A description of your first major project",
-      technologies: ["React", "Node.js", "MongoDB"]
-    },
-    {
-      title: "Project 2",
-      description: "Details about your second project",
-      technologies: ["Python", "Django", "PostgreSQL"]
-    }
-  ];
-
-  const skills = [
-    "JavaScript", "Python", "React", "Node.js",
-    "SQL", "Git", "AWS", "Docker"
-  ];
+  // Import Three.js
+  import * as THREE from 'three';
 </script>
 
 <main>
   <BoringModeHeader/>
 
   <section id="about">
+    <img src='./src/assets/vanGogh2.jpg' alt="Placeholder Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 500px; object-fit: cover; z-index: -1; opacity: 80%" />
+
     <h2>About Me</h2>
     <p>
-      I'm a passionate full stack developer with experience building web applications.
-      I love solving complex problems and learning new technologies.
+      poopy on my sloopy
     </p>
   </section>
 
+  <BoringModeTrackGrid/>
 
 </main>
 
 <style>
+
+  h2 {
+    color: #333;
+  }
+
+  p {
+    color: #333;
+  }
+
   .skills-container {
     display: flex;
     flex-wrap: wrap;
